@@ -1,0 +1,56 @@
+%{
+#include <stdio.h>
+
+%}
+
+%%
+
+%%
+
+int yywrap(void) { return 1; }
+
+int main() {
+    printf("\nEnter text (type 'end' to finish or Ctrl + Z(windows)/Ctrl + D(Linux/MacOS)):\n");
+    yylex();
+
+    return 0;
+}
+
+%{
+#include <stdio.h>
+
+// Counters for different patterns
+int no_of_lines = 0;
+int no_of_chars = 0;
+int no_of_a_plus = 0;
+int count_pattern = 0;
+int no_of_aaaa = 0;
+%}
+
+%%
+// Rules for counting
+\n          { ++no_of_lines; }       // Count new lines
+.           { ++no_of_chars; }       // Count any character
+a+          { ++no_of_a_plus; }      // Count sequences of 'a+'
+[-09]       { ++count_pattern; }     // Count occurrences of '-', '0', or '9'
+a{4}        { ++no_of_aaaa; }        // Count occurrences of 'aaaa'
+end         { return 0; }            // Stop when 'end' is found
+
+%%
+
+int yywrap(void) { return 1; }
+
+int main() {
+    printf("\nEnter text (type 'end' to finish or Ctrl + Z(windows)/Ctrl + D(Linux/MacOS)):\n");
+    yylex();
+    
+    // Print results
+    printf("\nResults:\n");
+    printf("Number of lines = %d\n", no_of_lines);
+    printf("Number of characters = %d\n", no_of_chars);
+    printf("Occurrences of 'a+' = %d\n", no_of_a_plus);
+    printf("Occurrences of '-', '0' or '9' = %d\n", count_pattern);
+    printf("Occurrences of 'aaaa' = %d\n", no_of_aaaa);
+
+    return 0;
+}

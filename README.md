@@ -1,3 +1,2 @@
-# Compilers_Team07
-
-Welcome to the team #07 repo, we hope you enjoy it :)
+This is the repo team #07 is going to use for the Compilers asignature 2025-2 semester
+We hope you like it:)
