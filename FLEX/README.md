@@ -3,4 +3,4 @@ We are doing the report on Overleaf: https://www.overleaf.com/2861565745cxmvnffk
 
 The flex implementation is in the directory with the name of implementation itself,
 the other folders are a prove to show that all of the team members understand how the
-lexer works given a certain input, the development architecture we are going to use is microservices, so that 3 team members include code modules to the main code without any malfunction
+lexer works given a certain input, the development architecture we are going to use is microservices, so that 3 team members include code modules to the main code without any malfunctions.
