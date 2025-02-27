@@ -1,32 +1,56 @@
-
 %{
 #include <stdio.h>
 
-int count_pattern = 0; // ocurrencias del patron
 %}
 
 %%
 
-[-09]     { count_pattern++; }    
-end       { return 0; }  
-
 %%
 
+int yywrap(void) { return 1; }
+
 int main() {
-	printf("\nReconoceremos las ocurrencias del patron [-09]\n");
-    printf("Ingresa un texto ('end' para finalizar o Ctrl + Z(windows)/Ctrl + D(Linux/MacOS)):\n");
+    printf("\nEnter text (type 'end' to finish or Ctrl + Z(windows)/Ctrl + D(Linux/MacOS)):\n");
     yylex();
-    printf("\nResultados:\n");
-    printf("Ocurrencias de '-', '0' o '9' = %d\n", count_pattern);
+
     return 0;
 }
 
-int yywrap() {
-    return 1;
+%{
+#include <stdio.h>
+
+// Counters for different patterns
+int no_of_lines = 0;
+int no_of_chars = 0;
+int no_of_a_plus = 0;
+int count_pattern = 0;
+int no_of_aaaa = 0;
+%}
+
+%%
+// Rules for counting
+\n          { ++no_of_lines; }       // Count new lines
+.           { ++no_of_chars; }       // Count any character
+a+          { ++no_of_a_plus; }      // Count sequences of 'a+'
+[-09]       { ++count_pattern; }     // Count occurrences of '-', '0', or '9'
+a{4}        { ++no_of_aaaa; }        // Count occurrences of 'aaaa'
+end         { return 0; }            // Stop when 'end' is found
+
+%%
+
+int yywrap(void) { return 1; }
+
+int main() {
+    printf("\nEnter text (type 'end' to finish or Ctrl + Z(windows)/Ctrl + D(Linux/MacOS)):\n");
+    yylex();
+    
+    // Print results
+    printf("\nResults:\n");
+    printf("Number of lines = %d\n", no_of_lines);
+    printf("Number of characters = %d\n", no_of_chars);
+    printf("Occurrences of 'a+' = %d\n", no_of_a_plus);
+    printf("Occurrences of '-', '0' or '9' = %d\n", count_pattern);
+    printf("Occurrences of 'aaaa' = %d\n", no_of_aaaa);
+
+    return 0;
 }
-
-
-
-Explanation, we are declaring a global variable to count all of the patterns that the lexical analyzer can found, after, between the percentage symbols, we are defining the rules for the lexical analyzer, we are telling that its going to search that symbols and if it seas an 'end', return us a 0, finishing the execution
-
-to finish, we initiate the main function and printing some text, first it asks for an entrance and the yylex (the lexical analyzer) function read everything we type on the terminal, after yywrap search if it anything more to read and if this is negative, it returns a -1
