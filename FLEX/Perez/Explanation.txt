@@ -1,0 +1,34 @@
+/* Declaring two counters one for number
+of lines other for number of characters */
+%{
+int num_of_2or4_a = 0;  //Counter of the number of times that aa, aaa or aaaa repeat
+int op_onedigit_plus_onedigit = 0;  //Counter of the number of times that a digit from 0 to 9 is operated with other
+%}                                  //Excample  2+4, 6-1, 5/1, 0*0
+
+/***rule 1 counts the number of lines,
+rule 2 counts the number of characters
+and rule 3 specifies when to stop
+taking input***/
+%%
+a{2,4}   ++num_of_2or4_a; //a{2,4} --> aa, aaa, aaaa
+[0-9][+\-\*\/][0-9]  printf("->Operation found: %s\n", yytext), ++op_onedigit_plus_onedigit; //when we found an operation we will print it on screen with the printf function
+end  return 0;  //it will finish with the word end                                                                             
+.           { /* Ignorar otros caracteres */ }
+%%
+
+/*** User code section***/
+int yywrap(){}
+int main(int argc, char **argv)
+{
+
+yylex();
+printf("number of aa or aaaa = %d, number of operations of one digit = %d\n",
+    num_of_2or4_a, op_onedigit_plus_onedigit);  //finallly we print the number of repititions
+
+return 0;
+}
+
+General Explanation
+The purpose of this program is to review the text that the user enters via keyboard and check how many times the strings 'aa', 'aaa', or 'aaaa' are repeated in the text.
+We will also check how many times an operation between two one-digit numbers occurs (for example: a+b, c-d, e*f, g/h).
+Additionally, we are adding a function that prints the operation as it occurs, making it easier to see which operation is taking place.
