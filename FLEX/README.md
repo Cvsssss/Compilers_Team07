@@ -1,1 +1,1 @@
-Besides we need to do an implementation and not only a testing, all the team members are going to test a pattern and explain to demostrate that we all did our job, also, we assigned a role to all of the team members to have a good organization
+Besides we need to do an implementation and not only a testing, all the team members are going to test a pattern and explain it, to demostrate that we all did our job, also, we assigned a role to all of the team members to have a good organization
