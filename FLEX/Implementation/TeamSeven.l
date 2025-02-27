@@ -4,13 +4,16 @@
 int no_of_a_plus = 0;
 int count_pattern = 0;
 int no_of_wxz = 0;
+int no_of_lines = 0;
+int no_of_chars = 0;
 %}
 
-%%
+%%     
 a+          { ++no_of_a_plus; }        
 [-09]      { ++count_pattern; }  
 w(x|y)z     {++no_of_wxz;} 
-
+\n          { ++no_of_lines; }       
+.           { ++no_of_chars; }  
 end         { return 0; }                
 
 %%

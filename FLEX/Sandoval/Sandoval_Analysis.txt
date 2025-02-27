@@ -2,6 +2,8 @@
    - one for the number of lines
    - one for the number of characters
    - one for the occurrences of 'a+'
+   ******The a+ rule in Flex is used to match and process sequences of one or more consecutive a characters. 
+  t only matches sequences of one or more as, not individual as mixed with other characters.
 */
 %{
 int no_of_lines = 0;
