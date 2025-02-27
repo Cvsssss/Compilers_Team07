@@ -1,4 +1,2 @@
-# Compilers_Team07
-
-Welcome to the team #07 repo, we hope you enjoy it :)
-Working file in Overleaf: https://www.overleaf.com/2861565745cxmvnffkppdj#19caee
+This is the repo team #07 is going to use for the Compilers asignature 2025-2 semester
+We hope you like it:)
